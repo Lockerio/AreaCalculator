@@ -5,8 +5,7 @@ from src.figures.figures_parent import FigureParent
 
 class Triangle(FigureParent):
     @staticmethod
-    def calculate_area(a: float, b: float, c: float):
-        sides = [a, b, c]
+    def calculate_area(sides: list[float]):
         if Triangle.is_triangle_right(sides[:]):
             hypotenuse = max(sides)
             sides.remove(hypotenuse)
@@ -14,7 +13,7 @@ class Triangle(FigureParent):
             return round(area, 2)
 
         p = sum(sides) / 2
-        area = math.sqrt(p * (p - a) * (p - b) * (p - c))
+        area = math.sqrt(p * (p - sides.pop()) * (p - sides.pop()) * (p - sides.pop()))
         return round(area, 2)
 
     @staticmethod
