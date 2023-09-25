@@ -45,9 +45,12 @@ def find_area(figure: str):
             except Exception as e:
                 calculated_area_label["text"] = e
 
+        case "not chosen":
+            calculated_area_label["text"] = "You didn't choose any figure!"
+
 
 win = tk.Tk()
-win.geometry("600x600+500+150")
+win.geometry("600x300+500+150")
 win.resizable(False, False)
 win.title("Area calculator")
 
@@ -55,14 +58,16 @@ win.grid_columnconfigure(0, minsize=300)
 win.grid_columnconfigure(1, minsize=300)
 
 figures = {
+    0: "not chosen",
     1: "circle",
     2: "triangle"
 }
 
 figure_var = tk.IntVar()
+figure_var.set(0)
 
 # Header
-tk.Label(win, text="Choose a figure").grid(row=0, column=0, columnspan=2, stick="we")
+tk.Label(win, text="Choose a figure:").grid(row=0, column=0, columnspan=2, stick="we")
 
 # Figures
 circle_radiobutton = tk.Radiobutton(win,
