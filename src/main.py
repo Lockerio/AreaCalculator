@@ -1,6 +1,23 @@
 import tkinter as tk
 
 from src.figures.circle import Circle
+from src.figures.triangle import Triangle
+
+
+def activate_figure(figure: str):
+    for figures_widget in figures_widgets:
+        figures_widget["state"] = tk.DISABLED
+
+    match figure:
+        case "circle":
+            circle_radius_label["state"] = tk.NORMAL
+            circle_radius_entry["state"] = tk.NORMAL
+
+        case "triangle":
+            triangle_side_label["state"] = tk.NORMAL
+            triangle_side_a_entry["state"] = tk.NORMAL
+            triangle_side_b_entry["state"] = tk.NORMAL
+            triangle_side_c_entry["state"] = tk.NORMAL
 
 
 def find_area(figure: str):
@@ -11,8 +28,11 @@ def find_area(figure: str):
             calculated_area_label["text"] = area
 
         case "triangle":
-            pass
-
+            triangle_side_a = int(triangle_side_a_entry.get())
+            triangle_side_b = int(triangle_side_b_entry.get())
+            triangle_side_c = int(triangle_side_c_entry.get())
+            area = Triangle.calculate_area([triangle_side_a, triangle_side_b, triangle_side_c])
+            calculated_area_label["text"] = area
 
 
 win = tk.Tk()
@@ -34,20 +54,39 @@ figure_var = tk.IntVar()
 tk.Label(win, text="Choose a figure").grid(row=0, column=0, columnspan=2, stick="we")
 
 # Figures
-tk.Radiobutton(win, text="Circle", variable=figure_var, value=1).grid(row=1, column=0)
-tk.Radiobutton(win, text="Triangle", variable=figure_var, value=2).grid(row=1, column=1)
-
+circle_radiobutton = tk.Radiobutton(win,
+                                    text="Circle",
+                                    variable=figure_var,
+                                    value=1,
+                                    command=lambda: activate_figure("circle"))
+circle_radiobutton.grid(row=1, column=0)
+triangle_radiobutton = tk.Radiobutton(win,
+                                      text="Triangle",
+                                      variable=figure_var,
+                                      value=2,
+                                      command=lambda: activate_figure("triangle"))
+triangle_radiobutton.grid(row=1, column=1)
 
 # Circle
-tk.Label(win, text="Enter radius:").grid(row=2, column=0)
-circle_radius_entry = tk.Entry(win)
+circle_radius_label = tk.Label(win,
+                               text="Enter radius:",
+                               state=tk.DISABLED)
+circle_radius_label.grid(row=2, column=0)
+circle_radius_entry = tk.Entry(win, state=tk.DISABLED)
 circle_radius_entry.grid(row=3, column=0)
 
 # Triangle
-tk.Label(win, text="Enter sides of the triangle:").grid(row=2, column=1)
-tk.Entry(win).grid(row=3, column=1)
-tk.Entry(win).grid(row=4, column=1)
-tk.Entry(win).grid(row=5, column=1)
+triangle_side_label = tk.Label(win,
+                               text="Enter sides of the triangle:",
+                               state=tk.DISABLED)
+triangle_side_label.grid(row=2, column=1)
+triangle_side_a_entry = tk.Entry(win, state=tk.DISABLED)
+triangle_side_b_entry = tk.Entry(win, state=tk.DISABLED)
+triangle_side_c_entry = tk.Entry(win, state=tk.DISABLED)
+triangle_side_a_entry.grid(row=3, column=1)
+triangle_side_b_entry.grid(row=4, column=1)
+triangle_side_c_entry.grid(row=5, column=1)
+
 
 # Footer
 calculate_area_btn = tk.Button(win,
@@ -58,6 +97,13 @@ calculate_area_btn.grid(row=6, column=0, columnspan=2)
 calculated_area_label = tk.Label(win, text="")
 calculated_area_label.grid(row=7, column=0, columnspan=2, stick="we")
 
-
+figures_widgets = [
+    circle_radius_label,
+    circle_radius_entry,
+    triangle_side_label,
+    triangle_side_a_entry,
+    triangle_side_b_entry,
+    triangle_side_c_entry,
+]
 
 win.mainloop()
