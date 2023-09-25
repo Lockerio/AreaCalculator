@@ -1,8 +1,7 @@
 import tkinter as tk
 
-from src.figures.circle import Circle
-from src.figures.triangle import Triangle
-from src.utils.validator import Validator
+from src.calculator.figures.circle import Circle
+from src.calculator.figures.triangle import Triangle
 
 
 def activate_figure(figure: str):
@@ -25,7 +24,7 @@ def find_area(figure: str):
     match figure:
         case "circle":
             try:
-                circle_radius = Validator.assert_input_value(circle_radius_entry.get())
+                circle_radius = circle_radius_entry.get()
                 area = Circle.calculate_area(circle_radius)
                 calculated_area_label["text"] = area
             except ValueError as e:
@@ -35,9 +34,9 @@ def find_area(figure: str):
 
         case "triangle":
             try:
-                triangle_side_a = Validator.assert_input_value(triangle_side_a_entry.get())
-                triangle_side_b = Validator.assert_input_value(triangle_side_b_entry.get())
-                triangle_side_c = Validator.assert_input_value(triangle_side_c_entry.get())
+                triangle_side_a = triangle_side_a_entry.get()
+                triangle_side_b = triangle_side_b_entry.get()
+                triangle_side_c = triangle_side_c_entry.get()
                 area = Triangle.calculate_area([triangle_side_a, triangle_side_b, triangle_side_c])
                 calculated_area_label["text"] = area
             except ValueError as e:

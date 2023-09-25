@@ -1,11 +1,12 @@
 import math
 
-from src.figures.figures_parent import FigureParent
+from src.calculator.figures.figures_parent import FigureParent
 
 
 class Triangle(FigureParent):
     @staticmethod
-    def calculate_area(sides: list[float]):
+    def calculate_area(sides: list):
+        sides = Triangle.assert_values(sides[:])
         if Triangle.is_triangle_exist(sides[:]):
             if Triangle.is_triangle_right(sides[:]):
                 hypotenuse = max(sides)
