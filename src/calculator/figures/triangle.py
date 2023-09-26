@@ -6,18 +6,20 @@ from src.calculator.figures.figures_parent import FigureParent
 class Triangle(FigureParent):
     @staticmethod
     def calculate_area(sides: list):
-        sides = Triangle.assert_values(sides[:])
-        if Triangle.is_triangle_exist(sides[:]):
-            if Triangle.is_triangle_right(sides[:]):
-                hypotenuse = max(sides)
-                sides.remove(hypotenuse)
-                area = sides.pop() * sides.pop() / 2
-                return round(area, 2)
+        if len(sides) == 3:
+            sides = Triangle.assert_values(sides[:])
+            if Triangle.is_triangle_exist(sides[:]):
+                if Triangle.is_triangle_right(sides[:]):
+                    hypotenuse = max(sides)
+                    sides.remove(hypotenuse)
+                    area = sides.pop() * sides.pop() / 2
+                    return round(area, 2)
 
-            p = sum(sides) / 2
-            area = math.sqrt(p * (p - sides.pop()) * (p - sides.pop()) * (p - sides.pop()))
-            return round(area, 2)
-        raise Exception("Such triangle does not exist!")
+                p = sum(sides) / 2
+                area = math.sqrt(p * (p - sides.pop()) * (p - sides.pop()) * (p - sides.pop()))
+                return round(area, 2)
+            raise Exception("Such triangle does not exist!")
+        raise Exception("Triangle can have only three sides!")
 
     @staticmethod
     def is_triangle_right(sides: list[float]):
