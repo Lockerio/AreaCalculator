@@ -2,7 +2,7 @@ class Validator:
     @staticmethod
     def assert_input_value(input_value):
         try:
-            if input_value:
+            if input_value or input_value == 0:
                 value = float(input_value)
 
                 if 0 <= value:
