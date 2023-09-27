@@ -12,7 +12,7 @@ def test_is_triangle_right__positive(input_list, expected_values):
     assert result_values == expected_values
 
 
-negative_results = [([1, 1, 45], False), ([34, 2, 145], False), ([11, 60, 21], False)]
+negative_results = [(["2", 3, 2], False), (["34", "35", "36"], False), ([11, 11, 21], False)]
 
 
 @pytest.mark.parametrize("input_list, expected_values", negative_results)
