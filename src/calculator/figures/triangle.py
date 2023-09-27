@@ -23,22 +23,28 @@ class Triangle(FigureParent):
 
     @staticmethod
     def is_triangle_right(sides: list[float]):
-        hypotenuse = max(sides)
-        sides.remove(hypotenuse)
-        leg1 = sides.pop()
-        leg2 = sides.pop()
+        if len(sides) == 3:
+            sides = Triangle.assert_values(sides[:])
+            hypotenuse = max(sides)
+            sides.remove(hypotenuse)
+            leg1 = sides.pop()
+            leg2 = sides.pop()
 
-        sum_of_squares_of_legs = leg1 * leg1 + leg2 * leg2
-        square_of_the_hypotenuse = hypotenuse * hypotenuse
+            sum_of_squares_of_legs = leg1 * leg1 + leg2 * leg2
+            square_of_the_hypotenuse = hypotenuse * hypotenuse
 
-        if sum_of_squares_of_legs == square_of_the_hypotenuse:
-            return True
-        return False
+            if sum_of_squares_of_legs == square_of_the_hypotenuse:
+                return True
+            return False
+        raise Exception("Triangle can have only three sides!")
 
     @staticmethod
     def is_triangle_exist(sides: list[float]):
-        max_side = max(sides)
-        sides.remove(max_side)
-        if sides.pop() + sides.pop() > max_side:
-            return True
-        return False
+        if len(sides) == 3:
+            sides = Triangle.assert_values(sides[:])
+            max_side = max(sides)
+            sides.remove(max_side)
+            if sides.pop() + sides.pop() > max_side:
+                return True
+            return False
+        raise Exception("Triangle can have only three sides!")
