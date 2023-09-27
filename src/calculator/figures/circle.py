@@ -10,6 +10,5 @@ class Circle(FigureParent):
         if len(radius) == 1 or type(radius) == str:
             radius = Validator.assert_input_value(radius)
             area = math.pi * radius * radius
-            print(area)
             return round(area, 2)
         raise Exception("You enter to many arguments!")
