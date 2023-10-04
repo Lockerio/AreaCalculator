@@ -3,7 +3,7 @@ import pytest
 from src.calculator.figures.circle import Circle
 
 
-positive_results = [([1], 3.14), ([8], 201.06), ([0], 0)]
+positive_results = [(1, 3.14), (8, 201.06), ("0", 0)]
 
 
 @pytest.mark.parametrize("input_value, expected_value", positive_results)

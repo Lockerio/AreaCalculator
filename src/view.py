@@ -24,7 +24,7 @@ def find_area(figure: str):
     match figure:
         case "circle":
             try:
-                circle_radius = circle_radius_entry.get()
+                circle_radius = float(circle_radius_entry.get())
                 area = Circle.calculate_area(circle_radius)
                 calculated_area_label["text"] = area
             except ValueError as e:
